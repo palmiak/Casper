@@ -1,0 +1,53 @@
+{
+  "name": "sage",
+  "homepage": "https://roots.io/sage/",
+  "authors": [
+    "Ben Word <ben@benword.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "foundation-sites": "~6.2",
+    "flickity": "2.0.2",
+    "flickity-imagesloaded": "~2.0.0",
+    "components-font-awesome": "~4.5.0",
+    "wow": "wowjs#~1.1.2",
+    "animate.css": "~3.5.1",
+    "font-awesome": "fontawesome#~4.6.3",
+    "hover": "Hover#^2.0.2",
+    "magnific-popup": "^1.1.0",
+    "classie": "^1.0.1",
+    "packery": "^2.1.1",
+    "jquery-nice-select": "^1.1.0",
+    "overpass": "2.1"
+  },
+  "overrides": {
+    "foundation-sites": {
+      "main": [
+        "./scss/foundation.scss",
+        "./dist/foundation.js"
+      ]
+    },
+    "flickity": {
+      "main": [
+        "./dist/flickity.pkgd.min.js",
+        "./dist/flickity.min.css"
+      ]
+    },
+    "overpass": {
+      "main": [
+        "./../../assets/fonts/recommended_over.css"
+      ]
+    },
+    "packery": {
+      "main": [
+        "./dist/packery.pkgd.min.js",
+        "./dist/packery.min.css"
+      ],
+      "dependencies": {}
+    }
+  },
+  "resolutions": {
+    "jquery": "~2.2.0"
+  }
+}
