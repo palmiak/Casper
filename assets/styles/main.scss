@@ -737,10 +737,10 @@ body.nav-opened .nav {
     color: rgba(255,255,255,0.2);
     margin-left: 5px;
 }
-.nav .nav-current:before {
+.nav .current-menu-item-menu-item:before {
     color: #fff;
 }
-.nav .nav-current a:after {
+.nav .current-menu-item a:after {
     content: " ";
     border-bottom: rgba(255,255,255,0.5) 1px solid;
     width: 100%;
@@ -752,7 +752,7 @@ body.nav-opened .nav {
     color: #B8B8B8;
 }
 
-.nav li.nav-current a,
+.nav li.current-menu-item a,
 .nav a:hover,
 .nav a:active,
 .nav a:focus {
@@ -2225,3 +2225,7 @@ body:not(.post-template) .post-title {
    End of file. Animations should be the last thing here. Do not add stuff
    below this point, or it will probably fuck everything up.
    ========================================================================== */
+
+.screen-reader-text {
+	display: none;
+}

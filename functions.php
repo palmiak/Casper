@@ -16,7 +16,6 @@ $sage_includes = [
 	'lib/titles.php',    // Page titles
 	'lib/wrapper.php',   // Theme wrapper class
 	'lib/customizer.php', // Theme customizer
-	'lib/class-flexible.php', //flexible content
 ];
 
 foreach ( $sage_includes as $file ) {
@@ -28,19 +27,35 @@ foreach ( $sage_includes as $file ) {
 }
 unset( $file, $filepath );
 
-register_nav_menus( array(
-	'main_menu_1'     	=> 'Menu główne - lewo',
-	'main_menu_2'    => 'Menu główne - prawo',
-	'main_menu_3' 	=> 'Menu główne - mobile',
-	'main_menu_4'     	=> 'Menu - foooter',
-) );
-
-if ( function_exists( 'acf_add_options_page' ) ) {
-	acf_add_options_page();
+function get_logo_url() {
+	$custom_logo_id = get_theme_mod( 'custom_logo' );
+	$image = wp_get_attachment_image_src( $custom_logo_id , 'full' );
+	return $image[0];
 }
 
-if ( is_admin() ) {
-	$content = new FlexibleContent( $_POST['post_ID'] );
-	//przy każdym zapisie wpisu odpalamy funkcję
-	add_action( 'acf/save_post', [ $content, 'content_on_save' ], 99 );
+function new_excerpt_more( $more ) {
+	return '<a class="read-more" href="'. get_the_permalink().'"> &raquo;</a>';
 }
+add_filter( 'excerpt_more', 'new_excerpt_more' );
+
+add_filter( 'user_contactmethods', 'modify_contact_methods' );
+
+function modify_contact_methods( $profile_fields ) {
+	// Add new fields
+	$profile_fields['location'] = __( 'Your location', 'sage' );
+
+	// Remove old fields
+	unset( $profile_fields['aim'] );
+	unset( $profile_fields['yim'] );
+	unset( $profile_fields['jabber'] );
+	unset( $profile_fields['facebook'] );
+	unset( $profile_fields['twitter'] );
+	unset( $profile_fields['gplus'] );
+	unset( $profile_fields['youtube'] );
+	return $profile_fields;
+}
+
+function unregister_categories() {
+	unregister_taxonomy_for_object_type( 'category', 'post' );
+}
+add_action( 'init', 'unregister_categories' );

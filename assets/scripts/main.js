@@ -17,217 +17,68 @@
     // All pages
     'common': {
       init: function() {
+		  WebFontConfig = {
+			  google: { families: [ 'Merriweather:300,300i,700,700i' , 'Open+Sans:400,700' ] }
+		  };
+		  (function() {
+			  var wf = document.createElement('script');
+			  wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+			  wf.type = 'text/javascript';
+			  wf.async = 'true';
+			  var s = document.getElementsByTagName('script')[0];
+			  s.parentNode.insertBefore(wf, s);
+		  })();
 
-        //functions
-        imagesLoaded( 'body', function() {
-            $("#preloader").fadeOut("fast");
-            $("body").removeClass("preload");
-        });
+	      var $document = $(document);
+	      $document.ready(function () {
 
-		function pad (str, max) {
-		    str = str.toString();
-		    return str.length < max ? pad("0" + str, max) : str;
-		  }
+	          var $postContent = $(".post-content");
+	          $postContent.fitVids();
 
-        $(document).foundation(); // Foundation JavaScript
+	          $(".scroll-down").arctic_scroll();
 
-        WebFontConfig = {
-          google: { families: [ 'Allura::latin,latin-ext' ] }
-        };
-        (function() {
-          var wf = document.createElement('script');
-          wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-          wf.type = 'text/javascript';
-          wf.async = 'true';
-          var s = document.getElementsByTagName('script')[0];
-          s.parentNode.insertBefore(wf, s);
-        })();
+	          $(".menu-button, .nav-cover, .nav-close").on("click", function(e){
+	              e.preventDefault();
+	              $("body").toggleClass("nav-opened nav-closed");
+	          });
 
-		wow = new WOW ({
-			mobile: false
-		});
-		wow.init();
+	      });
 
-		$("a[href='#mainnav']").click(function() {
-			$("html, body").animate({ scrollTop: 0 }, "normal");
-			return false;
-		});
+	      // Arctic Scroll by Paul Adam Davis
+	      // https://github.com/PaulAdamDavis/Arctic-Scroll
+	      $.fn.arctic_scroll = function (options) {
 
-		$('.album-image').magnificPopup({
-			type: 'image',
-			image: {
-				markup: '<div class="mfp-figure">'+
-				        '<div class="mfp-close"></div>'+
-				        '<div class="mfp-img"></div>'+
-						'<h5 class="mfp-title "></h5>'+
-				        '<div class="mfp-bottom-bar">'+
-				          '<div class=""></div>'+
-				          '<div class="mfp-counter"></div>'+
-				        '</div>'+
-				      '</div>',
-				titleSrc: function(item) {
-					if( item.el.attr('data-link') !== '' ){
-						return '<h4 class="lb-title text-center georgia yellow">' + item.el.attr('title') + '</h4>' + '<div class="mfp-button"><a target="about:blank" class="button borders yellow block" href="' + item.el.attr('data-link') + '">Chcesz kupić? Kliknij tutaj <i class="fa fa-angle-right" aria-hidden="true"></i></a></div>';
-					} else {
-						return '<h4 class="lb-title text-center georgia yellow">' + item.el.attr('title') + '</h4>';
-					}
+	          var defaults = {
+	              elem: $(this),
+	              speed: 500
+	          },
 
-				},
-			},
-			gallery: {
-	            enabled: true
-          	},
-			callbacks: {
-				elementParse: function(item) {
-			      // Function will fire for each target element
-			      // "item.el" is a target DOM element (if present)
-			      // "item.src" is a source that you may modify
-				  console.log( item );
-				  console.log( item.el.attr('data-link') );
-			    },
-			}
+	          allOptions = $.extend(defaults, options);
 
-		});
-		var $container = $('.gallery-list-static').imagesLoaded( function() {
-		  // initialize Packery after all images have loaded
-		  $container.packery({
-			itemSelector: '.item',
-			gutter: 0,
-			percentPosition: true
-		  });
-		});
+	          allOptions.elem.click(function (event) {
+	              event.preventDefault();
+	              var $this = $(this),
+	                  $htmlBody = $('html, body'),
+	                  offset = ($this.attr('data-offset')) ? $this.attr('data-offset') : false,
+	                  position = ($this.attr('data-position')) ? $this.attr('data-position') : false,
+	                  toMove;
 
-		// fixed menu po scrollu
-		var nav_height = $("#mainnav").height();
-		var nav_scroll = jQuery(document).scrollTop();
-		if(nav_scroll>nav_height){
-		   jQuery('#mainnav').addClass('addbg');
-		} else {
-		   jQuery('#mainnav').removeClass('addbg');
-		}
+	              if (offset) {
+	                  toMove = parseInt(offset);
+	                  $htmlBody.stop(true, false).animate({scrollTop: ($(this.hash).offset().top + toMove) }, allOptions.speed);
+	              } else if (position) {
+	                  toMove = parseInt(position);
+	                  $htmlBody.stop(true, false).animate({scrollTop: toMove }, allOptions.speed);
+	              } else {
+	                  $htmlBody.stop(true, false).animate({scrollTop: ($(this.hash).offset().top) }, allOptions.speed);
+	              }
+	          });
 
-		jQuery( window ).scroll(function() {
-			var nav_height = $("#mainnav").height();
-			var nav_scroll = jQuery(document).scrollTop();
-			if(nav_scroll>nav_height){
-			   jQuery('#mainnav').addClass('addbg');
-			} else {
-			   jQuery('#mainnav').removeClass('addbg');
-			}
-		});
-
-		$(".scrollarrow").click(function() {
-			$('html, body').animate({
-				scrollTop: $("#first").offset().top - nav_height
-			}, 1000);
-		});
-
-		imagesLoaded( '.main-slider', function() {
-			$('.main-slider').flickity({
-			  cellAlign: 'center',
-			  prevNextButtons: true,
-			  pageDots: false,
-			  wrapAround: true
-			});
-		});
-
-		$("#mobilemenu").hide();
-		$(".mobilemenu-btn").click(function() {
-		  $("body").toggleClass("preload");
-		  $("#mobilemenu").slideToggle("normal");
-		  return false;
-		});
-
-		$('.mobilemenu-btn').click(function() {
-		  $(this).toggleClass('open');
-		});
-
-		/**
-		 * ALM - wywoływanie equalizera na kazde doczytanie
-		 */
-		$.fn.almComplete = function(alm){
-			new Foundation.Equalizer($(".eq_row")).applyHeight();
-  		};
-
-		/**
-		 * ALM - ukrywanie buttona
-		 */
-
-		$.fn.almDone = function(){
-       		$( '.alm-btn-wrap' ).hide();
-    	};
-
-		// Replace all SVG images with inline SVG
-		jQuery('img.svg').each(function(){
-		 var $img = jQuery(this);
-		 var imgID = $img.attr('id');
-		 var imgClass = $img.attr('class');
-		 var imgURL = $img.attr('src');
-
-		 jQuery.get(imgURL, function(data) {
-		     // Get the SVG tag, ignore the rest
-		     var $svg = jQuery(data).find('svg');
-
-		     // Add replaced image's ID to the new SVG
-		     if(typeof imgID !== 'undefined') {
-		         $svg = $svg.attr('id', imgID);
-		     }
-		     // Add replaced image's classes to the new SVG
-		     if(typeof imgClass !== 'undefined') {
-		         $svg = $svg.attr('class', imgClass+' replaced-svg');
-		     }
-
-		     // Remove any invalid XML tags as per http://validator.w3.org
-		     $svg = $svg.removeAttr('xmlns:a');
-
-		     // Replace image with new SVG
-		     $img.replaceWith($svg);
-
-		 }, 'xml');
-		});
-
+	      };
       },
       finalize: function() {
         // JavaScript to be fired on all pages, after page specific JS is fired
       }
-    },
-    // Home page
-    'home': {
-      init: function() {
-        // JavaScript to be fired on the home page
-
-      },
-      finalize: function() {
-        // JavaScript to be fired on the home page, after the init JS
-      }
-    },
-
-    'post_type_archive_albumy': {
-		init: function() {
-			packeryInit = false;
-			if( packeryInit !== true ){
-				var $container = $('.gallery-list').imagesLoaded( function() {
-		          // initialize Packery after all images have loaded
-		          $container.packery({
-		            itemSelector: '.item',
-		            gutter: 0,
-					percentPosition: true
-		          });
-		        });
-
-
-				packeryInit = true;
-			}
-
-		    $.fn.almComplete = function(alm){ // Ajax Load More callback function
-				$('.gallery-list').imagesLoaded( function() {
-		    		$container.packery('reloadItems'); // Reload masonry items after callback
-					$container.packery();
-				});
-		    };
-	    },
-	    finalize: function() {
-	    }
     }
   };
 

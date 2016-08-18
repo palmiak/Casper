@@ -14,12 +14,17 @@ function setup() {
 
   // Enable plugins to manage the document title
   // http://codex.wordpress.org/Function_Reference/add_theme_support#Title_Tag
-  add_theme_support('title-tag');
+  add_theme_support( 'title-tag' );
+
+	$args = [
+		'uploads'       => true,
+	];
+	add_theme_support( 'custom-header', $args );
 
   // Register wp_nav_menu() menus
   // http://codex.wordpress.org/Function_Reference/register_nav_menus
   register_nav_menus([
-    'primary_navigation' => __('Primary Navigation', 'sage')
+    'primary_navigation' => __( 'Primary Navigation', 'sage' )
   ]);
 
   // Add post thumbnails
@@ -30,11 +35,11 @@ function setup() {
 
   // Add post formats
   // http://codex.wordpress.org/Post_Formats
-  add_theme_support('post-formats', ['aside', 'gallery', 'link', 'image', 'quote', 'video', 'audio']);
+  //add_theme_support('post-formats', ['aside', 'gallery', 'link', 'image', 'quote', 'video', 'audio']);
 
   // Add HTML5 markup for captions
   // http://codex.wordpress.org/Function_Reference/add_theme_support#HTML5
-  add_theme_support('html5', ['caption', 'comment-form', 'comment-list']);
+  add_theme_support( 'html5', ['caption', 'comment-form', 'comment-list'] );
 
   // Tell the TinyMCE editor to use a custom stylesheet
   add_editor_style(Assets\asset_path('styles/editor-style.css'));

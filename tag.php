@@ -11,8 +11,8 @@
     </nav>
     <div class="vertical">
         <div class="main-header-content inner">
-            <h1 class="page-title"><?php bloginfo( 'title' );?></h1>
-            <h2 class="page-description"><?php bloginfo( 'description' );?></h2>
+            <h1 class="page-title"><?php single_tag_title(); ?></h1>
+            <h2 class="page-description"><?php echo tag_description(); ?></h2>
         </div>
     </div>
     <a class="scroll-down icon-arrow-left" href="#content" data-offset="-45"><span class="hidden"><?php _e( 'Scroll Down', 'sage' );?></span></a>

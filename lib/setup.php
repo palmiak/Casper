@@ -24,6 +24,9 @@ function setup() {
   // http://codex.wordpress.org/Function_Reference/add_theme_support#Title_Tag
   add_theme_support('title-tag');
 
+  add_theme_support( 'custom-header' );
+  add_theme_support( 'custom-logo' );
+
   // Register wp_nav_menu() menus
   // http://codex.wordpress.org/Function_Reference/register_nav_menus
 
@@ -35,7 +38,7 @@ function setup() {
 
   // Enable post formats
   // http://codex.wordpress.org/Post_Formats
-  add_theme_support('post-formats', ['aside', 'gallery', 'link', 'image', 'quote', 'video', 'audio']);
+  //add_theme_support('post-formats', ['aside', 'gallery', 'link', 'image', 'quote', 'video', 'audio']);
 
   // Enable HTML5 markup support
   // http://codex.wordpress.org/Function_Reference/add_theme_support#HTML5
@@ -43,20 +46,11 @@ function setup() {
 
   // Use main stylesheet for visual editor
   // To add custom styles edit /assets/styles/layouts/_tinymce.scss
-  // add_editor_style(Assets\asset_path('styles/main.css'));
+  add_editor_style(Assets\asset_path('styles/main.css'));
 
-	register_post_type( 'albumy', array(
-		'labels' => array(
-		    'name' => 'Albumy',
-		),
-		'public' => true,
-		'rewrite' => array( 'slug' => 'albumy' ),
-		'capability_type' => 'post',
-		'hierarchical' => false,
-		'has_archive' => true,
-		'supports' => array( 'title', 'editor', 'author', 'thumbnail', 'revisions' ),
-		)
-	);
+  register_nav_menus([
+    'primary_navigation' => __( 'Primary Navigation', 'sage' )
+  ]);
 
 }
 add_action('after_setup_theme', __NAMESPACE__ . '\\setup');
