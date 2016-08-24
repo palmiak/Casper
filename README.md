@@ -16,10 +16,8 @@ For more info, check [Sage Documentaion](https://roots.io/sage/)
 
 ## ToDo
 - [ ] Add Category support
-- [ ] Add Tag and User featured image
 - [ ] Add exceprts for next / previous post
-- [ ] Add comments template
-- [ ] Add TGM to install plugins
+- [ ] Add WP comments template
 
 ## Copyright & License
 Copyright (c) 2016 Maciej Palmowski - Released under the MIT License.
