@@ -14,7 +14,7 @@ if ( function_exists( 'get_field' ) && '' != $author_bg ) :
 <header class="main-header author-head" style="background-image: url(<?php header_image(); ?>)">
 <?php endif ;?>
     <nav class="main-nav overlay clearfix">
-		<?php if ( '' != get_logo_url() ) : ?>
+		<?php if ( '' != get_theme_mod( 'custom_logo' ) ) : ?>
 		<a class="blog-logo" href="<?php bloginfo( 'url' );?>"><img src="<?php echo get_logo_url(); ?>" alt="<?php bloginfo( 'title' );?>" /></a>
 		<?php endif; ?>
         <a class="menu-button icon-menu" href="#"><span class="word">Menu</span></a>
