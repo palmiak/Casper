@@ -272,7 +272,7 @@ ul ol, ol ul {
 
 dl dt {
     float: left;
-    width: 180px;
+    width: 100%;
     overflow: hidden;
     clear: left;
     text-align: right;
@@ -452,7 +452,7 @@ textarea, select, input {
     font-weight: 100;
     line-height: 1.4em;
     background: #fff;
-    border: #e7eef2 1px solid;
+    border: #efefef 1px solid;
     border-radius: 4px;
     box-shadow: none;
     -webkit-appearance: none;
@@ -584,6 +584,16 @@ body.nav-opened .site-wrapper {
     background: #222 no-repeat center center;
     background-size: cover;
     overflow: hidden;
+
+	&:before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(#000, 0.45);
+	}
 }
 
 .main-header .inner {
@@ -703,10 +713,15 @@ body.nav-opened .nav {
 .nav ul {
     padding: 90px 9% 5%;
     list-style: none;
-    counter-reset: item;
+    // counter-reset: item;
+
+    ul {
+		padding: 0;
+		margin-left:1rem;
+	}
 }
 
-.nav li:before {
+/*.nav li:before {
     display: block;
     float: right;
     padding-right: 4%;
@@ -717,7 +732,7 @@ body.nav-opened .nav {
     color: #B8B8B8;
     content: counter(item, lower-roman);
     counter-increment: item;
-}
+}*/
 .nav li {
     margin: 0;
 }
@@ -947,6 +962,15 @@ body.nav-opened .nav {
     font-weight: 700;
     font-family: "Open Sans", sans-serif;
     color: #fff;
+
+	a {
+		text-decoration: none;
+		color: #fff;
+
+		&:hover {
+			color: rgba(#fff, 0.7);
+		}
+	}
 }
 
 .page-description {
@@ -1005,7 +1029,7 @@ body.nav-opened .nav {
     content: "";
     width: 7px;
     height: 7px;
-    border: #E7EEF2 1px solid;
+    border: #efefef 1px solid;
     position: absolute;
     bottom: -5px;
     left: 50%;
@@ -1016,7 +1040,7 @@ body.nav-opened .nav {
 }
 
 body:not(.post-template) .post-title {
-    font-size: 3.6rem;
+    font-size: 4.2rem;
 }
 
 .post-title a {
@@ -1172,6 +1196,11 @@ body:not(.post-template) .post-title {
     transform: translateX(-50%);
 }
 
+.post-content figure {
+	width: 100%!important;
+	max-width: 100%!important;
+}
+
 .footnotes {
     font-style: italic;
     font-size: 1.3rem;
@@ -1316,7 +1345,7 @@ body:not(.post-template) .post-title {
     content: "";
     width: 7px;
     height: 7px;
-    border: #E7EEF2 1px solid;
+    border: #efefef 1px solid;
     position: absolute;
     bottom: -5px;
     left: 50%;
@@ -1342,7 +1371,7 @@ body:not(.post-template) .post-title {
     padding: 6px;
     background: #fff;
     z-index: 2;
-    box-shadow: #E7EEF2 0 0 0 1px;
+    box-shadow: #efefef 0 0 0 1px;
 }
 
 .author-image .img {
@@ -1466,21 +1495,6 @@ body:not(.post-template) .post-title {
     padding-bottom: 6rem;
 }
 
-.read-next-story .post:before {
-    content: "Read This Next";
-    padding: 4px 10px 5px;
-    text-transform: uppercase;
-    font-size: 1.1rem;
-    font-family: "Open Sans", sans-serif;
-    color: rgba(255,255,255,0.8);
-    border: rgba(255,255,255,0.5) 1px solid;
-    border-radius: 4px;
-    transition: all 0.5s ease;
-}
-.read-next-story.prev .post:before {
-    content: "You Might Enjoy";
-}
-
 .read-next-story h2 {
     margin-top: 1rem;
     color: #fff;
@@ -1571,6 +1585,8 @@ body:not(.post-template) .post-title {
 
 .pagination a {
     color: #9EABB3;
+	display: inline-block;
+	padding: 0 0.5em;
     transition: all 0.2s ease;
 }
 
@@ -1615,7 +1631,7 @@ body:not(.post-template) .post-title {
     content: "";
     width: 7px;
     height: 7px;
-    border: #E7EEF2 1px solid;
+    border: #efefef 1px solid;
     position: absolute;
     bottom: -5px;
     left: 50%;
@@ -1644,7 +1660,7 @@ body:not(.post-template) .post-title {
    ========================================================================== */
 
 .gh-subscribe {
-    border: #e7eef2 1px solid;
+    border: #efefef 1px solid;
     padding: 3rem;
     margin-top: 3rem;
     text-align: center;
@@ -2229,3 +2245,9 @@ body:not(.post-template) .post-title {
 .screen-reader-text {
 	display: none;
 }
+
+/* ==========================================================================
+   Maciej Palmowski - extras style
+   ========================================================================== */
+
+   @import "styles"

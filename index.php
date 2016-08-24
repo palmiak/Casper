@@ -11,7 +11,7 @@
     </nav>
     <div class="vertical">
         <div class="main-header-content inner">
-            <h1 class="page-title"><?php bloginfo( 'title' );?></h1>
+            <h1 class="page-title"><a href="<?php bloginfo( 'url' );?>"><?php bloginfo( 'title' );?></a></h1>
             <h2 class="page-description"><?php bloginfo( 'description' );?></h2>
         </div>
     </div>
@@ -19,11 +19,11 @@
 </header>
 
 <main id="content" class="content" role="main">
-<?php
-while ( have_posts() ) {
-	the_post();
-	get_template_part( 'templates/post', 'entry' );
-}
-?>
-<?php the_posts_pagination(); ?>
+	<?php
+	while ( have_posts() ) {
+		the_post();
+		get_template_part( 'templates/post', 'entry' );
+	}
+	?>
+	<?php the_posts_pagination(); ?>
 </main>
