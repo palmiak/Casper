@@ -8,6 +8,7 @@
   "private": true,
   "dependencies": {
     "jquery": "~2.2.0",
-    "jquery.fitvids": "FitVids#^1.1.0"
+    "jquery.fitvids": "FitVids#^1.1.0",
+    "magnific-popup": "^1.1.0"
   }
 }
