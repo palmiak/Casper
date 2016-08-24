@@ -18,7 +18,7 @@ if ( has_post_thumbnail() ) :
     </nav>
     <div class="vertical">
         <div class="main-header-content inner">
-            <h1 class="page-title"><?php bloginfo( 'title' );?></h1>
+            <h1 class="page-title"><a href="<?php bloginfo( 'url' );?>"><?php bloginfo( 'title' );?></a></h1>
             <h2 class="page-description"><?php bloginfo( 'description' );?></h2>
         </div>
     </div>
