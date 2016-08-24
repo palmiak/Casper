@@ -25,7 +25,7 @@ if ( has_post_thumbnail() ) :
     <a class="scroll-down icon-arrow-left" href="#content" data-offset="-45"><span class="hidden"><?php _e( 'Scroll Down', 'sage' );?></span></a>
 </header>
 
-<main class="content" role="main">
+<main class="content" role="main" id="content">
     <article class="post post-template">
 
         <header class="post-header">
@@ -37,6 +37,10 @@ if ( has_post_thumbnail() ) :
 
         <section class="post-content">
             <?php the_content(); ?>
+
+			<div id="comments">
+				<?php comments_template(); ?>
+			</div>
         </section>
 
         <footer class="post-footer">
