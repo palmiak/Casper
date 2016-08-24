@@ -1,4 +1,14 @@
-<?php if ( '' == get_header_image() ) : ?>
+<?php
+if ( function_exists( 'get_field' ) ) {
+	$author_id = get_query_var( 'author' );
+	$author_bg = get_field( 'background', 'user_'.$author_id );
+}
+
+if ( function_exists( 'get_field' ) && '' != $author_bg ) :
+	$img = wp_get_attachment_image_src( $author_bg , 'full' )[0];
+?>
+<header class="main-header author-head" style="background-image: url(<?php echo $img; ?>)">
+<?php elseif ( '' == get_header_image() ) : ?>
 <header class="main-header author-head no-cover">
 <?php else : ?>
 <header class="main-header author-head" style="background-image: url(<?php header_image(); ?>)">

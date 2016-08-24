@@ -1,4 +1,17 @@
-<?php if ( '' == get_header_image() ) : ?>
+<?php
+if ( function_exists( 'get_field' ) ) {
+	$queried_object = get_queried_object();
+	$taxonomy = $queried_object->taxonomy;
+	$term_id = $queried_object->term_id;
+
+	$tag_bg = get_field( 'background', $taxonomy . '_' . $term_id );
+}
+
+if ( function_exists( 'get_field' ) && '' != $tag_bg ) :
+	$img = wp_get_attachment_image_src( $tag_bg , 'full' )[0];
+?>
+<header class="main-header" style="background-image: url(<?php echo $img; ?>)">
+<?php elseif ( '' == get_header_image() ) : ?>
 <header class="main-header no-cover">
 <?php else : ?>
 <header class="main-header" style="background-image: url(<?php header_image(); ?>)">
