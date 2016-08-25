@@ -37,6 +37,7 @@ if ( has_post_thumbnail() ) :
 
         <section class="post-content">
             <?php the_content(); ?>
+			<?php wp_link_pages(); ?>
 
 			<div id="comments">
 				<?php comments_template(); ?>
