@@ -18,6 +18,9 @@ For more info, check [Sage Documentaion](https://roots.io/sage/)
 - [ ] Add Category support
 - [ ] Add exceprts for next / previous post
 - [ ] Add WP comments template
+- [ ] Image optimization
+- [ ] RWD Images
+- [ ] Lazy load
 
 ## Copyright & License
 Copyright (c) 2016 Maciej Palmowski - Released under the MIT License.
