@@ -54,9 +54,8 @@
 			    }
 			});
 			//gallery popup
-			$('.gallery').each(function() {
+			$('.gallery a[href*=".jpg"], .gallery a[href*=".jpeg"], .gallery a[href*=".png"], .gallery a[href*=".gif"]').each(function() {
 			    $(this).magnificPopup({
-			            delegate: 'a',
 			            type: 'image',
 			            gallery: {enabled:true}
 			    });
