@@ -14,6 +14,9 @@ gulp
 
 For more info, check [Sage Documentaion](https://roots.io/sage/)
 
+## Demo
+Check out the [demo](http://nano.dev-insanelab.com/casper-for-wp/).
+
 ## ToDo
 - [ ] Add Category support
 - [ ] Add exceprts for next / previous post
