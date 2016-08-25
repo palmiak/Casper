@@ -3,11 +3,11 @@ the_post();
 if ( has_post_thumbnail() ) :
 	$img = wp_get_attachment_image_src( get_post_thumbnail_id() , 'full' )[0];
 ?>
-<header class="main-header" style="background-image: url(<?php echo $img; ?>)">
+<header class="main-header post-head" style="background-image: url(<?php echo $img; ?>)">
 <?php elseif ( '' != get_header_image() ) : ?>
-<header class="main-header" style="background-image: url(<?php header_image(); ?>)">
+<header class="main-header post-head" style="background-image: url(<?php header_image(); ?>)">
 <?php else : ?>
-<header class="main-header no-cover">
+<header class="main-header no-cover post-head">
 <?php endif ;?>
 
     <nav class="main-nav overlay clearfix">

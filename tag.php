@@ -10,11 +10,11 @@ if ( function_exists( 'get_field' ) ) {
 if ( function_exists( 'get_field' ) && '' != $tag_bg ) :
 	$img = wp_get_attachment_image_src( $tag_bg , 'full' )[0];
 ?>
-<header class="main-header" style="background-image: url(<?php echo $img; ?>)">
+<header class="main-header tag-head" style="background-image: url(<?php echo $img; ?>)">
 <?php elseif ( '' == get_header_image() ) : ?>
-<header class="main-header no-cover">
+<header class="main-header tag-head no-cover">
 <?php else : ?>
-<header class="main-header" style="background-image: url(<?php header_image(); ?>)">
+<header class="main-header tag-head" style="background-image: url(<?php header_image(); ?>)">
 <?php endif ;?>
     <nav class="main-nav overlay clearfix">
 		<?php if ( '' != get_theme_mod( 'custom_logo' ) ) : ?>
