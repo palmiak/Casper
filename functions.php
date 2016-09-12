@@ -117,3 +117,14 @@ function sage_add_title_to_attachment( $markup, $id ) {
 	return str_replace( '<a ', '<a title="'.$att->post_title.'" ', $markup );
 }
 add_filter( 'wp_get_attachment_link', 'sage_add_title_to_attachment', 10, 5 );
+
+function image_tag_class( $class ) {
+	$class .= ' no-barba';
+	return $class;
+}
+add_filter( 'get_image_tag_class', 'image_tag_class' );
+
+function add_rel_to_gallery( $link, $id ) {
+	return str_replace( '<a', '<a class="no-barba" ', $link );
+}
+add_filter( 'wp_get_attachment_link', 'add_rel_to_gallery', 10, 2 );

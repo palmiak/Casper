@@ -11,6 +11,40 @@
  * ======================================================================== */
 
 (function($) {
+
+function menu() {
+	console.log( 'plum' );
+	var $document = $(document);
+	$document.ready(function () {
+
+		var $postContent = $(".post-content");
+		$postContent.fitVids();
+
+		$(".scroll-down").arctic_scroll();
+
+		$(".menu-button, .nav-cover, .nav-close").on("click", function(e){
+			e.preventDefault();
+			$("body").toggleClass("nav-opened nav-closed");
+		});
+
+	});
+}
+
+function popup() {
+	$('a[href*=".jpg"], a[href*=".jpeg"], a[href*=".png"], a[href*=".gif"]').each(function(){
+		//single image popup
+		if ($(this).parents('.gallery').length === 0) {
+				$(this).magnificPopup({type:'image'});
+		}
+	});
+	//gallery popup
+	$('.gallery a[href*=".jpg"], .gallery a[href*=".jpeg"], .gallery a[href*=".png"], .gallery a[href*=".gif"]').each(function() {
+		$(this).magnificPopup({
+				type: 'image',
+				gallery: {enabled:true}
+		});
+	});
+}
   // Use this variable to set up the common and page specific functions. If you
   // rename this variable, you will also need to rename the namespace below.
   var Sage = {
@@ -29,37 +63,79 @@
 			  s.parentNode.insertBefore(wf, s);
 		  })();
 
-	      var $document = $(document);
-	      $document.ready(function () {
 
-	          var $postContent = $(".post-content");
-	          $postContent.fitVids();
+		  menu();
+		  Barba.Pjax.start();
+		  var FadeTransition = Barba.BaseTransition.extend({
+		    start: function() {
+		      /**
+		       * This function is automatically called as soon the Transition starts
+		       * this.newContainerLoading is a Promise for the loading of the new container
+		       * (Barba.js also comes with an handy Promise polyfill!)
+		       */
 
-	          $(".scroll-down").arctic_scroll();
+		      // As soon the loading is finished and the old page is faded out, let's fade the new page
+		      Promise
+		        .all([this.newContainerLoading, this.fadeOut()])
+		        .then(this.fadeIn.bind(this));
+		    },
 
-	          $(".menu-button, .nav-cover, .nav-close").on("click", function(e){
-	              e.preventDefault();
-	              $("body").toggleClass("nav-opened nav-closed");
-	          });
+		    fadeOut: function() {
+		      /**
+		       * this.oldContainer is the HTMLElement of the old Container
+		       */
 
-	      });
+		      return $(this.oldContainer).animate({ opacity: 0 }).promise();
+		    },
 
+		    fadeIn: function() {
+		      /**
+		       * this.newContainer is the HTMLElement of the new Container
+		       * At this stage newContainer is on the DOM (inside our #barba-container and with visibility: hidden)
+		       * Please note, newContainer is available just after newContainerLoading is resolved!
+		       */
 
-		  //Magnific popup
+		      var _this = this;
+		      var $el = $(this.newContainer);
 
-			$('a[href*=".jpg"], a[href*=".jpeg"], a[href*=".png"], a[href*=".gif"]').each(function(){
-			    //single image popup
-			    if ($(this).parents('.gallery').length === 0) {
-			            $(this).magnificPopup({type:'image'});
-			    }
-			});
-			//gallery popup
-			$('.gallery a[href*=".jpg"], .gallery a[href*=".jpeg"], .gallery a[href*=".png"], .gallery a[href*=".gif"]').each(function() {
-			    $(this).magnificPopup({
-			            type: 'image',
-			            gallery: {enabled:true}
-			    });
-			});
+		      $(this.oldContainer).hide();
+
+		      $el.css({
+		        visibility : 'visible',
+		        opacity : 0
+		      });
+
+		      $el.animate({ opacity: 1 }, 400, function() {
+		        /**
+		         * Do not forget to call .done() as soon your transition is finished!
+		         * .done() will automatically remove from the DOM the old Container
+		         */
+				document.body.scrollTop = 0;
+		        _this.done();
+		      });
+		    }
+		  });
+
+		  /**
+		   * Next step, you have to tell Barba to use the new Transition
+		   */
+
+		  Barba.Pjax.getTransition = function() {
+		    /**
+		     * Here you can use your own logic!
+		     * For example you can use different Transition based on the current page or link...
+		     */
+
+		    return FadeTransition;
+		  };
+
+		  Barba.Dispatcher.on( 'transitionCompleted', function() {
+			  	$("body").removeClass("nav-opened nav-closed");
+			  	menu();
+				popup();
+		  });
+
+		  popup();
 
 
 	      // Arctic Scroll by Paul Adam Davis

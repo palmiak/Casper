@@ -6,19 +6,23 @@
 <html <?php language_attributes(); ?>>
 	<?php get_template_part( 'templates/head' ); ?>
 	<body <?php body_class( 'nav-closed' ); ?>>
-		<?php
-		get_template_part( 'templates/includes', 'navigation' );
-		?>
-		<div class="site-wrapper">
-		<?php
-		do_action( 'get_header' );
+		<div id="barba-wrapper">
+  			<div class="barba-container">
+				<?php
+				get_template_part( 'templates/includes', 'navigation' );
+				?>
+				<div class="site-wrapper">
+				<?php
+				do_action( 'get_header' );
 
-		include Wrapper\template_path();
+				include Wrapper\template_path();
 
-		do_action( 'get_footer' );
-		get_template_part( 'templates/footer' );
-		wp_footer();
-		?>
+				do_action( 'get_footer' );
+				get_template_part( 'templates/footer' );
+				wp_footer();
+				?>
+				</div>
+			</div>
 		</div>
 	</body>
 </html>
